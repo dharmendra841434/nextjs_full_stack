@@ -20,8 +20,8 @@ const Login = () => {
 
     await axios
       .post("/api/users/login", {
-        username: "dhruvk2182",
-        password: "123456789",
+        username: username,
+        password: password,
       })
       .then((res) => {
         console.log(res.data, "resposnse data");

@@ -65,17 +65,22 @@ export async function POST(request) {
       "-password"
     );
 
-    const cookies = new Cookies();
+    // const cookies = new Cookies();
 
-    cookies.set("accessToken", accessToken, { httpOnly: true, secure: true });
-    cookies.set("refreshToken", refreshToken, { httpOnly: true, secure: true });
+    // cookies.set("accessToken", accessToken, { httpOnly: true, secure: true });
+    // cookies.set("refreshToken", refreshToken, { httpOnly: true, secure: true });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       message: "Admin logged In Successfully",
       data: loggedInAdmin,
       accessToken,
       refreshToken,
     });
+
+    response.cookies.set("accessToken", accessToken, { httpOnly: true });
+    response.cookies.set("refreshToken", refreshToken, { httpOnly: true });
+
+    return response;
   } catch (error) {
     console.log(error);
   }
